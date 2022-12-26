@@ -1,0 +1,70 @@
+#=========================================================================
+# Git Ignore Files
+#=========================================================================
+# We explicitly ignore a default build directory, the autoconf generated
+# autom4te.cache directory, and automatically generated python files.
+# This makes it easy to do a clean build under the source directory and
+# still have it appear clean to git.
+
+.\#*
+*build*/
+autom4te.cache*
+admin/work*
+.DS_Store
+.cache/
+*~
+.lock*
+*.swp
+*.pyc
+*.gcda
+*.gcno
+*.o
+*.bin
+admin/process-github
+core.*
+*-adhoc
+.vscode/
+.vscode/*
+
+# Binaries for pa1
+pa1-math/src/pow-iter
+pa1-math/src/pow-recur
+pa1-math/src/sqrt-iter
+pa1-math/src/sqrt-recur
+pa1-math/src/pow-iter-adhoc
+pa1-math/src/pow-recur-adhoc
+pa1-math/src/sqrt-iter-adhoc
+pa1-math/src/sqrt-recur-adhoc
+
+# Binaries for pa2
+pa2-dstruct/src/list
+pa2-dstruct/src/vector
+pa2-dstruct/src/list-adhoc
+pa2-dstruct/src/vector-adhoc
+
+# Binaries for pa3
+pa3-algo/src/ssort-int-adhoc
+pa3-algo/src/msort-int-adhoc
+pa3-algo/src/qsort-int-adhoc
+pa3-algo/src/bsort-int-adhoc
+pa3-algo/src/vector-int-adhoc
+
+# Binaries for pa4
+pa4-sys/src/image-adhoc
+pa4-sys/src/sort-int-adhoc
+pa4-sys/src/sort-image-adhoc
+pa4-sys/src/vector-int-adhoc
+pa4-sys/src/vector-image-adhoc
+
+# Binaries for pa5
+pa5-sys/src/image-adhoc
+pa5-sys/src/sort-adhoc
+pa5-sys/src/vector-adhoc
+pa5-sys/src/table-adhoc
+pa5-sys/src/tree-adhoc
+
+# Files for pa5 frontend
+pa5-sys/eval/hrs-backend
+pa5-sys/eval/image.eps
+pa5-sys/eval/image.png
+pa5-sys/eval/image.txt

@@ -1,0 +1,51 @@
+name: Submission
+on: [push, pull_request]
+jobs:
+  PA5:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install dependencies
+        run: |-
+          sudo apt-get update
+          sudo apt-get install -y lcov valgrind
+      - name: install mnist
+        run: |-
+          sudo mkdir -p /classes/ece2400/mnist
+          sudo chown runner:docker /classes/ece2400/mnist
+          wget https://github.com/cornell-ece2400/ece2400-mnist-travisci-cache/raw/master/mnist.tar.gz
+          tar -xvf mnist.tar.gz -C /classes/ece2400/mnist
+      - name: check out repository
+        uses: actions/checkout@v2
+      - name: make build dir
+        run: mkdir pa5-sys/build
+      - name: run cmake
+        run: |-
+          cd pa5-sys/build
+          cmake ..
+      - name: run check
+        timeout-minutes: 2
+        run: |-
+          cd pa5-sys/build
+          CTEST_OUTPUT_ON_FAILURE=1 make check
+      - name: run coverage
+        run: |-
+          cd pa5-sys/build
+          make coverage
+      - name: run memcheck
+        run: |-
+          cd pa5-sys/build
+          make memcheck
+      - name: make eval
+        run: |-
+          mkdir pa5-sys/build-eval
+          cd pa5-sys/build-eval
+          cmake -DCMAKE_BUILD_TYPE=eval ..
+          make eval
+      - name: run eval
+        run: |-
+          cd pa5-sys/build-eval
+          ./hrs-linear-search-eval 6000 100
+          ./hrs-binary-search-eval 6000 100 15
+          ./hrs-alternative-eval 6000 100
+          ./hrs-table-search-eval 6000 100 15
+          ./hrs-tree-search-eval 6000 100 15
